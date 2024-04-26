@@ -1,0 +1,98 @@
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    float balance = 0;
+    int choice;
+    string name, lastn, nick;
+    int age, cont, bday;
+    bool signedIn = false; 
+
+    cout << "############   WELCOME TO BS2MA BANK! ###############\n\n" << endl;
+
+    while (true) {
+        if (!signedIn) {
+            cout << "1. Sign up" << endl;
+            cout << "2. Sign in" << endl;
+            cout << "3. Exit" << endl;
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch (choice) {
+                case 1:
+                    cout << "\n\nFirst Name: ";
+                    cin >> name;
+                    cout << "Last Name: ";
+                    cin >> lastn;
+                    cout << "Nickname: ";
+                    cin >> nick;
+                    cout << "Age: ";
+                    cin >> age;
+                    cout << "Contact number: +63 ";
+                    cin >> cont;
+                    cout << "Date of birth (ex-08-29-2004): ";
+                    cin >> bday;
+                    cout << "\n\nAccount created successfully!" << endl;
+                    break;
+                case 2:
+                    {
+                        string signInNick;
+                        cout << "\n\nEnter your nickname: ";
+                        cin >> signInNick;
+                        if (signInNick == nick) {
+                            cout << "\n\nSign in successful!" << endl;
+                            signedIn = true;
+                        } else {
+                            cout << "Nickname not found. Please sign up first." << endl;
+                        }
+                    }
+                    break;
+                case 3:
+                    cout << "Exiting the program. Thank you!" << endl;
+                    return 0;
+                default:
+                    cout << "Invalid choice. Please enter a valid option." << endl;
+            }
+        } else {
+            cout << "1. Withdraw" << endl;
+            cout << "2. Deposit" << endl;
+            cout << "3. Check Balance" << endl;
+            cout << "4. Sign out" << endl;
+            cout << "Enter your choice: ";
+            cin >> choice;
+
+            switch (choice) {
+                case 1:
+                    float withdrawAmount;
+                    cout << "Enter amount to withdraw: ";
+                    cin >> withdrawAmount;
+                    if (withdrawAmount > balance) {
+                        cout << "Insufficient funds." << endl;
+                    } else {
+                        balance -= withdrawAmount;
+                        cout << "Withdrawal successful. New balance: " << balance << endl;
+                    }
+                    break;
+                case 2:
+                    float depositAmount;
+                    cout << "Enter amount to deposit: ";
+                    cin >> depositAmount;
+                    balance += depositAmount;
+                    cout << "Deposit successful. New balance: " << balance << endl;
+                    break;
+                case 3:
+                    cout << "Your balance: " << balance << endl;
+                    break;
+                case 4:
+                    cout << "Signing out..." << endl;
+                    signedIn = false;
+                    break;
+                default:
+                    cout << "Invalid choice. Please enter a valid option." << endl;
+            }
+        }
+    }
+
+    return 0;
+}
